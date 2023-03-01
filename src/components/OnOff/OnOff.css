@@ -1,10 +1,12 @@
 .circle {
-    width: 50px;
-    height: 50px;
-    -webkit-border-radius: 25px;
-    -moz-border-radius: 25px;
-    border-radius: 25px;
+    width: 7px;
+    height: 4px;
+    border-radius: 15px;
+    border: 1px solid #282c34;
     background: white;
+    display: inline-block;
+    padding: 5px;
+    justify-content: center;
 }
 
 .green {
@@ -15,7 +17,12 @@
     background: orangered;
 }
 
-.btnColor {
-    background: #282c34;
-    color: white;
+.btn {
+    background: white;
+    border: 1px solid #282c34;
+    color: #282c34;
+    width: 40px;
+    height: 30px;
+    display: inline-block;
+    padding: 5px;
 }
