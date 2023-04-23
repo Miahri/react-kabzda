@@ -1,25 +1,31 @@
-import React from "react";
+import React, {useState} from "react";
 
 type AccordionPropsType = {
     title: string
     collapsed: boolean
+    setCollapsed: (status: boolean) => void
 }
 
 export function Accordion(props: AccordionPropsType) {
+
+    const onOffHandler = () => {props.collapsed ? props.setCollapsed(false) : props.setCollapsed(true)};
+
     return (
         <div>
-            <AccordionTitle title={props.title}/>
-            {!props.collapsed && <AccordionBody />}
+            <AccordionTitle title={props.title} onOffHandler={onOffHandler}/>
+            {props.collapsed && <AccordionBody />}
         </div>
     )
 }
 
 type AccordionTitleType = {
     title: string
+    onOffHandler: () => void
 }
 function AccordionTitle(props: AccordionTitleType) {
+
     return(
-        <h3>{props.title}</h3>
+        <h3 onClick={(e) => props.onOffHandler()}>{props.title}</h3>
     )
 }
 

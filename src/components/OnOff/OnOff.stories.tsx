@@ -1,7 +1,8 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import {action} from "@storybook/addon-actions";
+import React, {useState} from 'react';
+import {ComponentMeta } from '@storybook/react';
 import {OnOff} from "./OnOff";
+import {ValueType} from "../../App";
+import {action} from "@storybook/addon-actions";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -9,25 +10,10 @@ export default {
     component: OnOff,
 } as ComponentMeta<typeof OnOff>;
 
-const callback = action('OnOff was changed');
+export const OnMode = () => <OnOff status={true} changeStatus={action('clicked')}/>
+export const OffMode = () => <OnOff status={false} changeStatus={action('clicked')}/>
+export const OnOffChanging = () => {
+    const [value, setValue] = useState<boolean>(true);
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof OnOff> = (args) => <OnOff {...args} />;
-
-export const OnOffGreen = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-OnOffGreen.args = {
-    status: true,
-};
-
-export const OnOffRed = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-OnOffRed.args = {
-    status: false,
-};
-
-export const ControlledOnOff = Template.bind({});
-ControlledOnOff.args = {
-    status: true,
-    changeStatus: callback//////////////////////////////////useState
-};
+    return <OnOff status={value} changeStatus={setValue}/>
+}
