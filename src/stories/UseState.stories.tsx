@@ -13,8 +13,12 @@ export function Counter () {
     //remembers the value returned by the function and protects against unnecessary recalculation
     const [count, setCount] = useState(generateData);
 
+    const changer = (state: number) => {
+        return state + 1;
+    }
+
     return <>
-        <button onClick={() => setCount(count + 1)}></button>
+        <button onClick={() => setCount(changer)}></button>
         {count}
     </>
 }
