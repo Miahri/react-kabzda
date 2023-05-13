@@ -20,3 +20,17 @@ export function SetTimeoutExample () {
         {count + ' ' + fake}
     </>
 }
+
+export function SetIntervalExample () {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        setInterval(() => {
+            setCount(state => state + 1)
+        }, 1000)
+    }, [])
+
+    return <>
+        {count}
+    </>
+}
