@@ -9,9 +9,13 @@ export function SetTimeoutExample () {
     const [fake, setFake] = useState(0);
 
     useEffect(() => {
-        setTimeout(() => {
+        const timeoutID = setTimeout(() => {
             document.title = count.toString();
         }, 1000)
+
+        return () => {
+            clearTimeout(timeoutID);
+        }
     }, [])
 
     return <>
@@ -25,12 +29,56 @@ export function SetIntervalExample () {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
-        setInterval(() => {
+        const intervalID = setInterval(() => {
             setCount(state => state + 1)
         }, 1000)
+
+        return () => {
+            clearTimeout(intervalID);
+        }
     }, [])
 
     return <>
         {count}
+    </>
+}
+
+export function KeysTrackerExample () {
+    const [text, setText] = useState('');
+
+    useEffect(() => {
+        const handler = (e: KeyboardEvent) => {
+            setText((state) => state + e.key)
+        }
+
+        window.addEventListener('keypress', handler);
+
+        return () => {
+            window.removeEventListener('keypress', handler);
+        }
+    }, [])
+
+    return <>
+        Typed text: {text}
+    </>
+}
+
+export function ResetEffectExample () {
+    const [counter, setCounter] = useState(0);
+
+    useEffect(() => {
+        console.log('Effect occured:' + counter)
+
+        return () => {
+            console.log('RESET EFFECT')
+        }
+    }, [counter])
+
+    const increase = () => {
+        setCounter(counter + 1)
+    }
+
+    return <>
+        Hello, counter {counter} <button onClick={increase}>+</button>
     </>
 }
